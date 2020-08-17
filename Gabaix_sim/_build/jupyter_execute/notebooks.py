@@ -2,6 +2,8 @@
 
 Prepared by Chien Yeh as research assistance for John Stachurski on power laws and the granular hypothesis
 
+## Introduction
+
 There is a debate about whether firm sizes follow Pareto distribution or log-normal distribution.
 This research simulates the variation of growth of aggregate output under the assumptions of {cite}`gabaix2011granular` with these two distributions of firm sizes. The results imply that the firm sizes are Pareto distributed.
 
@@ -11,7 +13,7 @@ By accounting, the aggregate output is the sum of firms' sales, that is,
 \end{equation}
 where $S_{it}$ denotes the sale for firm $i$. {cite}`gabaix2011granular` assumes that all firms have the same volatility on growth, $\sigma$, so that the volatility of GDP, $\sigma_{GDP}$, contributed from idiosyncratic shocks of firms is
 \begin{equation}
-    \sigma_{GDP} = \sigma \sum_{i=1}^N \left(\frac{S_{it}}{Y_t}\right)^2. 
+    \sigma_{GDP} = \sigma \left[\sum_{i=1}^N \left(\frac{S_{it}}{Y_t}\right)^2\right]^{0.5}. 
 \end{equation}
 
 {cite}`gabaix2011granular` proves that if the variance of firms' sales or sizes is finite, then $\sigma_{GDP}$ decays out as the rate $1/\sqrt{N}.$ Then, the idiosyncratic shocks of firms are averaged out and only have little impact on macroeconomic fluctuation.
@@ -23,6 +25,33 @@ The simulation is under the assumption of {cite}`gabaix2011granular` that all fi
 Moreover, the parameter of Pareto distribution follows {cite}`axtell2001zipf` with Pareto exponent $\zeta=1.059.$ The parameters of log-normal distribution is determined by matching the mean and median with Pareto distribution.
 
 When there are $1$ million firms $N=10^6$, the simulated $\sigma_{GDP}$ of equation (2) is $0.94\%$ for Pareto distributed firm sizes and is $0.1\%$ for log-normal distribution. Since the variance of log-normal distribution is finite, this result implies that the propositions in {cite}`gabaix2011granular` is reasonable. Moreover, since the empirical study in {cite}`gabaix2011granular` supports that the idiosyncratic shocks affect aggregate fluctuations and the empirical $\sigma_{GDP}$ is around $1\%$, the Pareto distribution for firm sizes is more reasonable than log-normal distribution. This concludes that the size of firms is Pareto distributed and then shocks among firms can have an impact on aggregate shocks.
+
+
+## The Setup
+To begin with, simulate the herfindhl for Pareto distribution. The formulas are from {cite}`gabaix2011granular`. Assume that all firms have
+
+$$h = \big[\sum_{i=1}^{N} (\frac{S_{it}}{Y_t})^2\big]^{0.5} $$
+$$Y_t = \sum_{i=1}^{N} S_{it} $$
+$$\sigma_{GDP} = \sigma \left[\sum_{i=1}^N \left(\frac{S_{it}}{Y_t}\right)^2\right]^{0.5} = \sigma h.$$ 
+
+Except for $\zeta=1$, also assume that $\zeta$ is 1.059 following {cite}`axtell2001zipf`.
+
+Moreover, this experiment generate Pareto distribution by inverse transform sampling. Suppose that the random variable $X$ is Pareto distributed and its cumulative distribution function is 
+
+\begin{equation}
+    F_X(x)  =
+    \begin{cases}
+    {(\frac{x_m}{x})}^{\zeta}, & \text{if } x \geq x_m \\
+    0, & x < x_m 
+    \end{cases}
+\end{equation}
+
+If we let $F_X(x)=u$, then random variable $U=u$ is uniform distributed, $U \sim \mathcal{U}[0, 1)$. Then, by the relationship
+
+\begin{equation}P(X \leq x) = P(F_X^{-1}(U) \leq x) = P(U \leq F_X(x)) = F_U(F_X(x)) = F_X(x),
+\end{equation}
+
+we can obtain the Pareto random variable $X$ by taking the inverse transform of uniform distributed $U$. More specifically, $x = F_X^{-1}(u) = x_m (1-u)^{-1/\zeta}$.
 
 
 import numpy as np
@@ -140,32 +169,6 @@ def sim_pareto(ζ, xm, nSim, N):
         h_array[i] = np.sqrt(np.sum(np.square(size / np.sum(size))))
     return np.median(h_array)
 
-#### The Setup
-To begin with, simulate the herfindhl for Pareto distribution. The formulas are from {cite}`gabaix2011granular`.
-
-$$h = \big[\sum_{i=1}^{N} (\frac{S_{it}}{Y_t})^2\big]^{0.5} $$
-$$Y_t = \sum_{i=1}^{N} S_{it} $$
-
-Except for $\zeta=1$, also assume that $\zeta$ is 1.059 following {cite}`axtell2001zipf`.
-
-Moreover, this experiment generate Pareto distribution by inverse transform sampling. Suppose that the random variable $X$ is Pareto distributed and its cumulative distribution function is 
-
-\begin{equation}
-    F_X(x)  =
-    \begin{cases}
-    {(\frac{x_m}{x})}^{\zeta}, & \text{if } x \geq x_m \\
-    0, & x < x_m 
-    \end{cases}
-\end{equation}
-
-If we let $F_X(x)=u$, then random variable $U=u$ is uniform distributed, $U \sim \mathcal{U}[0, 1)$. Then, by the relationship
-
-\begin{equation}P(X \leq x) = P(F_X^{-1}(U) \leq x) = P(U \leq F_X(x)) = F_U(F_X(x)) = F_X(x),
-\end{equation}
-
-we can obtain the Pareto random variable $X$ by taking the inverse transform of uniform distributed $U$. More specifically, $x = F_X^{-1}(u) = x_m (1-u)^{-1/\zeta}$.
-
-
 H = herfindahl()
 
 for zeta in [1, 1.059, 1.5]:
@@ -184,7 +187,7 @@ Both the herfindahl and variance of growth rate are decreasing in $\zeta$. If $\
 
 Generally, the result is compatible with {cite}`gabaix2011granular`.
 
-#### Match the mean and median.
+### Match the mean and median.
 Given the Pareto distribution with tail index $\zeta > 1$, the density function is
 \begin{equation}
 f_P(x)=\frac{\zeta {\bar{x}}^{\zeta}}{x^{\zeta+1}}, \text{  if}\ x\geq \bar{x}. 
@@ -211,7 +214,7 @@ Now, we can try to match the log-normal with Pareto distribution under Zipf's la
 
 Solve the equation of median given $\zeta$ and $\bar{x}=1$, we have $\mu = \ln(2^{1/\zeta})$. Plug this into the mean equation, we can get $\sigma = (2 \ln(\frac{\zeta}{\zeta-1}) - \frac{2}{\zeta}\ln2)^{1/2}$.
 
-##### Use the formula to sove $\mu$ and $\sigma$ numerically and plot the distribution.
+### Use the formula to sove $\mu$ and $\sigma$ numerically and plot the distribution.
 
 H = herfindahl()
 for zeta in [1+np.finfo(float).eps, 1.059, 1.5]:
@@ -230,7 +233,7 @@ for zeta in [1.059, 1.5]:
 
 The scales for herfindahl and $\sigma_{GDP}$ under log-normal are way smaller than those under Pareto distribution.
 
- ##### Conclusion
+ ## Conclusion
  
 This research simulates the the standard deviations for GDP growth for both Pareto distribution and log-normal distribution for firm sizes under Zipf's law. The choice of Pareto exponent $\zeta$ and the formulas for variance follow cite}`gabaix2011granular`. In addition, the simulation method is Monte Carlo, the Pareto random variables are generated by the inverse transform sampling, and the parameters for log-normal are determined such that the corresponding mean and median are equal those of Pareto distribution. 
  
