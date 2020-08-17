@@ -123,15 +123,20 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-setup">
-   The Setup
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#match-the-mean-and-median">
-   Match the mean and median.
+  <a class="reference internal nav-link" href="#the-setup">
+   The Setup
   </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#match-the-mean-and-median">
+     Match the mean and median.
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#use-the-formula-to-sove-mu-and-sigma-numerically-and-plot-the-distribution">
      Use the formula to sove
@@ -145,12 +150,12 @@
      numerically and plot the distribution.
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#conclusion">
-     Conclusion
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
  </li>
 </ul>
 
@@ -165,6 +170,8 @@
   <div class="section" id="investigation-of-the-granular-hypothesis">
 <h1>Investigation of the Granular Hypothesis<a class="headerlink" href="#investigation-of-the-granular-hypothesis" title="Permalink to this headline">¶</a></h1>
 <p>Prepared by Chien Yeh as research assistance for John Stachurski on power laws and the granular hypothesis</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>There is a debate about whether firm sizes follow Pareto distribution or log-normal distribution.
 This research simulates the variation of growth of aggregate output under the assumptions of <a class="bibtex reference internal" href="#gabaix2011granular" id="id1">[Gab11]</a> with these two distributions of firm sizes. The results imply that the firm sizes are Pareto distributed.</p>
 <p>By accounting, the aggregate output is the sum of firms’ sales, that is,
@@ -173,7 +180,7 @@ Y_t = \sum_{i=1}^N {S_{it}}
 \end{equation}
 where <span class="math notranslate nohighlight">\(S_{it}\)</span> denotes the sale for firm <span class="math notranslate nohighlight">\(i\)</span>. <a class="bibtex reference internal" href="#gabaix2011granular" id="id2">[Gab11]</a> assumes that all firms have the same volatility on growth, <span class="math notranslate nohighlight">\(\sigma\)</span>, so that the volatility of GDP, <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span>, contributed from idiosyncratic shocks of firms is
 \begin{equation}
-\sigma_{GDP} = \sigma \sum_{i=1}^N \left(\frac{S_{it}}{Y_t}\right)^2.
+\sigma_{GDP} = \sigma \left[\sum_{i=1}^N \left(\frac{S_{it}}{Y_t}\right)^2\right]^{0.5}.
 \end{equation}</p>
 <p><a class="bibtex reference internal" href="#gabaix2011granular" id="id3">[Gab11]</a> proves that if the variance of firms’ sales or sizes is finite, then <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span> decays out as the rate <span class="math notranslate nohighlight">\(1/\sqrt{N}.\)</span> Then, the idiosyncratic shocks of firms are averaged out and only have little impact on macroeconomic fluctuation.
 However, if the sizes of firms follows a power law,
@@ -182,6 +189,29 @@ which have finite variance if the Pareto exponent is less than or equal to <span
 The simulation is under the assumption of <a class="bibtex reference internal" href="#gabaix2011granular" id="id5">[Gab11]</a> that all firms have the identical variance of growth and. Specifically, let  <span class="math notranslate nohighlight">\(\sigma = 12\%\)</span> following  <a class="bibtex reference internal" href="#gabaix2011granular" id="id6">[Gab11]</a>.
 Moreover, the parameter of Pareto distribution follows <a class="bibtex reference internal" href="#axtell2001zipf" id="id7">[Axt01]</a> with Pareto exponent <span class="math notranslate nohighlight">\(\zeta=1.059.\)</span> The parameters of log-normal distribution is determined by matching the mean and median with Pareto distribution.</p>
 <p>When there are <span class="math notranslate nohighlight">\(1\)</span> million firms <span class="math notranslate nohighlight">\(N=10^6\)</span>, the simulated <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span> of equation (2) is <span class="math notranslate nohighlight">\(0.94\%\)</span> for Pareto distributed firm sizes and is <span class="math notranslate nohighlight">\(0.1\%\)</span> for log-normal distribution. Since the variance of log-normal distribution is finite, this result implies that the propositions in <a class="bibtex reference internal" href="#gabaix2011granular" id="id8">[Gab11]</a> is reasonable. Moreover, since the empirical study in <a class="bibtex reference internal" href="#gabaix2011granular" id="id9">[Gab11]</a> supports that the idiosyncratic shocks affect aggregate fluctuations and the empirical <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span> is around <span class="math notranslate nohighlight">\(1\%\)</span>, the Pareto distribution for firm sizes is more reasonable than log-normal distribution. This concludes that the size of firms is Pareto distributed and then shocks among firms can have an impact on aggregate shocks.</p>
+</div>
+<div class="section" id="the-setup">
+<h2>The Setup<a class="headerlink" href="#the-setup" title="Permalink to this headline">¶</a></h2>
+<p>To begin with, simulate the herfindhl for Pareto distribution. The formulas are from <a class="bibtex reference internal" href="#gabaix2011granular" id="id10">[Gab11]</a>. Assume that all firms have</p>
+<div class="math notranslate nohighlight">
+\[h = \big[\sum_{i=1}^{N} (\frac{S_{it}}{Y_t})^2\big]^{0.5} \]</div>
+<div class="math notranslate nohighlight">
+\[Y_t = \sum_{i=1}^{N} S_{it} \]</div>
+<div class="math notranslate nohighlight">
+\[\sigma_{GDP} = \sigma \left[\sum_{i=1}^N \left(\frac{S_{it}}{Y_t}\right)^2\right]^{0.5} = \sigma h.\]</div>
+<p>Except for <span class="math notranslate nohighlight">\(\zeta=1\)</span>, also assume that <span class="math notranslate nohighlight">\(\zeta\)</span> is 1.059 following <a class="bibtex reference internal" href="#axtell2001zipf" id="id11">[Axt01]</a>.</p>
+<p>Moreover, this experiment generate Pareto distribution by inverse transform sampling. Suppose that the random variable <span class="math notranslate nohighlight">\(X\)</span> is Pareto distributed and its cumulative distribution function is</p>
+<p>\begin{equation}
+F_X(x)  =
+\begin{cases}
+{(\frac{x_m}{x})}^{\zeta}, &amp; \text{if } x \geq x_m \
+0, &amp; x &lt; x_m
+\end{cases}
+\end{equation}</p>
+<p>If we let <span class="math notranslate nohighlight">\(F_X(x)=u\)</span>, then random variable <span class="math notranslate nohighlight">\(U=u\)</span> is uniform distributed, <span class="math notranslate nohighlight">\(U \sim \mathcal{U}[0, 1)\)</span>. Then, by the relationship</p>
+<p>\begin{equation}P(X \leq x) = P(F_X^{-1}(U) \leq x) = P(U \leq F_X(x)) = F_U(F_X(x)) = F_X(x),
+\end{equation}</p>
+<p>we can obtain the Pareto random variable <span class="math notranslate nohighlight">\(X\)</span> by taking the inverse transform of uniform distributed <span class="math notranslate nohighlight">\(U\)</span>. More specifically, <span class="math notranslate nohighlight">\(x = F_X^{-1}(u) = x_m (1-u)^{-1/\zeta}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -307,26 +337,6 @@ Moreover, the parameter of Pareto distribution follows <a class="bibtex referenc
 </div>
 </div>
 </div>
-<div class="section" id="the-setup">
-<h2>The Setup<a class="headerlink" href="#the-setup" title="Permalink to this headline">¶</a></h2>
-<p>To begin with, simulate the herfindhl for Pareto distribution. The formulas are from <a class="bibtex reference internal" href="#gabaix2011granular" id="id10">[Gab11]</a>.</p>
-<div class="math notranslate nohighlight">
-\[h = \big[\sum_{i=1}^{N} (\frac{S_{it}}{Y_t})^2\big]^{0.5} \]</div>
-<div class="math notranslate nohighlight">
-\[Y_t = \sum_{i=1}^{N} S_{it} \]</div>
-<p>Except for <span class="math notranslate nohighlight">\(\zeta=1\)</span>, also assume that <span class="math notranslate nohighlight">\(\zeta\)</span> is 1.059 following <a class="bibtex reference internal" href="#axtell2001zipf" id="id11">[Axt01]</a>.</p>
-<p>Moreover, this experiment generate Pareto distribution by inverse transform sampling. Suppose that the random variable <span class="math notranslate nohighlight">\(X\)</span> is Pareto distributed and its cumulative distribution function is</p>
-<p>\begin{equation}
-F_X(x)  =
-\begin{cases}
-{(\frac{x_m}{x})}^{\zeta}, &amp; \text{if } x \geq x_m \
-0, &amp; x &lt; x_m
-\end{cases}
-\end{equation}</p>
-<p>If we let <span class="math notranslate nohighlight">\(F_X(x)=u\)</span>, then random variable <span class="math notranslate nohighlight">\(U=u\)</span> is uniform distributed, <span class="math notranslate nohighlight">\(U \sim \mathcal{U}[0, 1)\)</span>. Then, by the relationship</p>
-<p>\begin{equation}P(X \leq x) = P(F_X^{-1}(U) \leq x) = P(U \leq F_X(x)) = F_U(F_X(x)) = F_X(x),
-\end{equation}</p>
-<p>we can obtain the Pareto random variable <span class="math notranslate nohighlight">\(X\)</span> by taking the inverse transform of uniform distributed <span class="math notranslate nohighlight">\(U\)</span>. More specifically, <span class="math notranslate nohighlight">\(x = F_X^{-1}(u) = x_m (1-u)^{-1/\zeta}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">herfindahl</span><span class="p">()</span>
@@ -352,9 +362,8 @@ If ζ is 1.500,  then h is 0.76% and the corresponding σ_GDP is 0.09%.
 <p>Gabaix also indicates that the empirically measured aggregate standard deviation of growth rate is around <span class="math notranslate nohighlight">\(1\%\)</span>.</p>
 <p>Both the herfindahl and variance of growth rate are decreasing in <span class="math notranslate nohighlight">\(\zeta\)</span>. If <span class="math notranslate nohighlight">\(\zeta=1.5\)</span>, the standard deviation for GDP growth is less than <span class="math notranslate nohighlight">\(0.1\%\)</span>.</p>
 <p>Generally, the result is compatible with <a class="bibtex reference internal" href="#gabaix2011granular" id="id13">[Gab11]</a>.</p>
-</div>
 <div class="section" id="match-the-mean-and-median">
-<h2>Match the mean and median.<a class="headerlink" href="#match-the-mean-and-median" title="Permalink to this headline">¶</a></h2>
+<h3>Match the mean and median.<a class="headerlink" href="#match-the-mean-and-median" title="Permalink to this headline">¶</a></h3>
 <p>Given the Pareto distribution with tail index <span class="math notranslate nohighlight">\(\zeta &gt; 1\)</span>, the density function is
 \begin{equation}
 f_P(x)=\frac{\zeta {\bar{x}}^{\zeta}}{x^{\zeta+1}}, \text{  if}\ x\geq \bar{x}.
@@ -373,6 +382,7 @@ g(x) = \frac{1}{\sigma x \sqrt{2\pi}} \exp{ {-\frac{(\ln{x-\mu})^2}{2\sigma^2}} 
 \text{median: } \quad  \bar{x} 2^{1/\zeta} = \exp(\mu)
 \end{equation}</p>
 <p>Solve the equation of median given <span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(\bar{x}=1\)</span>, we have <span class="math notranslate nohighlight">\(\mu = \ln(2^{1/\zeta})\)</span>. Plug this into the mean equation, we can get <span class="math notranslate nohighlight">\(\sigma = (2 \ln(\frac{\zeta}{\zeta-1}) - \frac{2}{\zeta}\ln2)^{1/2}\)</span>.</p>
+</div>
 <div class="section" id="use-the-formula-to-sove-mu-and-sigma-numerically-and-plot-the-distribution">
 <h3>Use the formula to sove <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> numerically and plot the distribution.<a class="headerlink" href="#use-the-formula-to-sove-mu-and-sigma-numerically-and-plot-the-distribution" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
@@ -420,8 +430,9 @@ If ζ is 1.500,  then h is 0.189% for matched log-normal and the corresponding �
 </div>
 <p>The scales for herfindahl and <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span> under log-normal are way smaller than those under Pareto distribution.</p>
 </div>
+</div>
 <div class="section" id="conclusion">
-<h3>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h3>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p>This research simulates the the standard deviations for GDP growth for both Pareto distribution and log-normal distribution for firm sizes under Zipf’s law. The choice of Pareto exponent <span class="math notranslate nohighlight">\(\zeta\)</span> and the formulas for variance follow cite}<code class="docutils literal notranslate"><span class="pre">gabaix2011granular</span></code>. In addition, the simulation method is Monte Carlo, the Pareto random variables are generated by the inverse transform sampling, and the parameters for log-normal are determined such that the corresponding mean and median are equal those of Pareto distribution.</p>
 <p>The simulated volatilities for GDP growth are too small and not in the same magnitude for both <span class="math notranslate nohighlight">\(\zeta=1.059\)</span> and <span class="math notranslate nohighlight">\(\zeta=1.5\)</span>.
 When firm’s growth rate is <span class="math notranslate nohighlight">\(12\%\)</span>, the deviation of growth rate is around <span class="math notranslate nohighlight">\(0.1\%\)</span> for log-normal which is much lower than <span class="math notranslate nohighlight">\(0.94\%\)</span> of Pareto given <span class="math notranslate nohighlight">\(\zeta=1.059\)</span>. Since the empirically measured macroeconomic fluctuation is around <span class="math notranslate nohighlight">\(1\%\)</span>, the log-normal distribution is not reasonable under this matching method and simulation.
@@ -435,7 +446,6 @@ This also confirms the first proposition of <a class="bibtex reference internal"
 </dd>
 </dl>
 </p>
-</div>
 </div>
 </div>
 
