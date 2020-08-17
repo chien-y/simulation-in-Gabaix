@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Investigation of the Granular Hypothesis &#8212; My Jupyter Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/sphinx-book-theme.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/togglebutton.js"></script>
+    <script type="text/javascript" src="_static/clipboard.min.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="_static/mystnb.js"></script>
+    <script type="text/javascript" src="_static/sphinx-book-theme.js"></script>
+    <script type="text/javascript">var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script type="text/javascript">
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" type="text/javascript" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+    
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/notebooks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebooks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#match-the-mean-and-median-provided-that-the-log-normal-distribution-is-cut-off-under-some-bar-x">
+   Match the mean and median provided that the log-normal distribution is cut off under some $ \bar{x}$.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-the-formula-to-sove-mu-and-sigma-numerically-and-plot-the-distribution">
+     Use the formula to sove
+     <span class="math notranslate nohighlight">
+      \(\mu\)
+     </span>
+     and
+     <span class="math notranslate nohighlight">
+      \(\sigma\)
+     </span>
+     numerically and plot the distribution.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conclusion">
+     Conclusion
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="investigation-of-the-granular-hypothesis">
+<h1>Investigation of the Granular Hypothesis<a class="headerlink" href="#investigation-of-the-granular-hypothesis" title="Permalink to this headline">¶</a></h1>
+<p>Prepared by Chien Yeh as research assistance for John Stachurski on power laws and the granular hypothesis</p>
+<p>There is a debate about whether firm sizes follow Pareto distribution or log-normal distribution.
+This research simulates the variation of growth of aggregate output under the assumptions of <a class="bibtex reference internal" href="#gabaix2011granular" id="id1">[Gab11]</a> with these two distributions of firm sizes. The results imply that the firm sizes are Pareto distributed.</p>
+<p>By accounting, the aggregate output is the sum of firms’ sales, that is,
+\begin{equation}
+Y_t = \sum_{i=1}^N {S_{it}}
+\end{equation}
+where <span class="math notranslate nohighlight">\(S_{it}\)</span> denotes the sale for firm <span class="math notranslate nohighlight">\(i\)</span>. <a class="bibtex reference internal" href="#gabaix2011granular" id="id2">[Gab11]</a> assumes that all firms have the same volatility on growth, <span class="math notranslate nohighlight">\(\sigma\)</span>, so that the volatility of GDP, <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span>, contributed from idiosyncratic shocks of firms is
+\begin{equation}
+\sigma_{GDP} = \sigma \sum_{i=1}^N \left(\frac{S_{it}}{Y_t}\right)^2.
+\end{equation}</p>
+<p>{cite}’gabaix2011granular’ proves that if the variance of firms’ sales or sizes is finite, then <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span> decays out as the rate <span class="math notranslate nohighlight">\(1/\sqrt{N}.\)</span> Then, the idiosyncratic shocks of firms are averaged out and only have little impact on macroeconomic fluctuation. However, if the sizes of firms follows a power law\footnote{
+The variance is infinite if the Pareto exponent is  less than or equal to <span class="math notranslate nohighlight">\(2\)</span>.}, <a class="bibtex reference internal" href="#gabaix2011granular" id="id3">[Gab11]</a> shows that the aggregate volatility decays according to <span class="math notranslate nohighlight">\(1/\ln N\)</span> under Zipf’s law. Therefore, the GDP fluctuation is substantial even if <span class="math notranslate nohighlight">\(N\)</span> is large. The fat tail makes the central limit theorem breaks down and the idiosyncratic shocks remains on aggregate output.</p>
+<p>This research uses numerical method to compare the aggregate fluctuations when firm sizes follow Pareto distribution and log-normal distribution.
+The simulation is under the assumption of <a class="bibtex reference internal" href="#gabaix2011granular" id="id4">[Gab11]</a> that all firms have the identical variance of growth and. Specifically, let  <span class="math notranslate nohighlight">\(\sigma = 12\%\)</span> following  <a class="bibtex reference internal" href="#gabaix2011granular" id="id5">[Gab11]</a>.
+Moreover, the parameter of Pareto distribution follows <a class="bibtex reference internal" href="#axtell2001zipf" id="id6">[Axt01]</a> with Pareto exponent <span class="math notranslate nohighlight">\(\zeta=1.059.\)</span> The parameters of log-normal distribution is determined by matching the mean and median with Pareto distribution.</p>
+<p>When there are <span class="math notranslate nohighlight">\(1\)</span> million firms <span class="math notranslate nohighlight">\(N=10^6\)</span>, the simulated <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span> of equation (2) is <span class="math notranslate nohighlight">\(0.94\%\)</span> for Pareto distributed firm sizes and is <span class="math notranslate nohighlight">\(0.1\%\)</span> for log-normal distribution. Since the variance of log-normal distribution is finite, this result implies that the propositions in <a class="bibtex reference internal" href="#gabaix2011granular" id="id7">[Gab11]</a> is reasonable. Moreover, since the empirical study in <a class="bibtex reference internal" href="#gabaix2011granular" id="id8">[Gab11]</a> supports that the idiosyncratic shocks affect aggregate fluctuations and the empirical <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span> is around <span class="math notranslate nohighlight">\(1\%\)</span>, the Pareto distribution for firm sizes is more reasonable than log-normal distribution. This concludes that the size of firms is Pareto distributed and then shocks among firms can have an impact on aggregate shocks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">levy_stable</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">pareto</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">lognorm</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="k">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">njit</span><span class="p">,</span> <span class="n">prange</span><span class="p">,</span> <span class="n">jitclass</span><span class="p">,</span> <span class="n">float64</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># matching_data = [</span>
+<span class="c1">#     (&#39;ζ&#39;, float64),</span>
+<span class="c1">#     (&#39;xm&#39;, float64),</span>
+<span class="c1">#     (&#39;h_lognormal&#39;, float64),</span>
+<span class="c1">#     (&#39;h_pareto&#39;, float64),</span>
+<span class="c1">#     (&#39;μ&#39;, float64),</span>
+<span class="c1">#     (&#39;σ&#39;, float64),</span>
+<span class="c1">#     (&#39;h_array&#39;, float64[:])</span>
+<span class="c1"># ]</span>
+
+<span class="c1"># @jitclass(matching_data)</span>
+
+
+<span class="k">class</span> <span class="nc">herfindahl</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Simulate herfindahl on Pareto and log-normal distributions</span>
+
+<span class="sd">    ζ: tail index</span>
+<span class="sd">    xm: minumum for Pareto distribution</span>
+<span class="sd">    nSim: number of times of simulation</span>
+<span class="sd">    N: number of firms</span>
+<span class="sd">    μ, σ are the shape parameters for log-normal</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ζ</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">xm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ζ</span> <span class="o">=</span> <span class="n">ζ</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xm</span> <span class="o">=</span> <span class="n">xm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_lognormal</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_pareto</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">μ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">σ</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">median_h</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pareto&#39;</span><span class="p">,</span> <span class="n">nSim</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000000</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;pareto&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">h_pareto</span> <span class="o">=</span> <span class="n">sim_pareto</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ζ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="p">,</span> <span class="n">nSim</span><span class="o">=</span><span class="n">nSim</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_pareto</span>
+
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;lognormal&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">h_lognormal</span> <span class="o">=</span> <span class="n">sim_lognormal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">μ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">σ</span><span class="p">,</span> <span class="n">nSim</span><span class="o">=</span><span class="n">nSim</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_lognormal</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The distribution should be either pareto or lognormal.&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Solve μ and σ such that the lognormal matches the Pareto distribution&#39;&#39;&#39;</span>
+        <span class="n">ζ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ζ</span>
+        <span class="k">if</span> <span class="n">ζ</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># prevent 1/0 in the formula</span>
+            <span class="n">ζ</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+        <span class="n">xm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xm</span>
+        <span class="n">μ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">xm</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">ζ</span>
+        <span class="n">σ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ζ</span> <span class="o">*</span> <span class="n">xm</span> <span class="o">/</span> <span class="p">(</span><span class="n">ζ</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="n">μ</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">pareto</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ζ</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">xm</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">lognorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">μ</span><span class="p">))</span>
+
+            <span class="n">xd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
+            <span class="n">xd2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">xd</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xd2</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">xd2</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;lognormal&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;μ=</span><span class="si">%1.5f</span><span class="s1">, σ=</span><span class="si">%1.5f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">μ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">σ</span> <span class="o">=</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span>
+        <span class="k">return</span> <span class="n">μ</span><span class="p">,</span> <span class="n">σ</span>
+
+    <span class="k">def</span> <span class="nf">s_GDP</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_π</span><span class="o">=</span><span class="mf">0.12</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pareto&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate the variance of GDP growth for both distribution&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;pareto&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_pareto</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">median_h</span><span class="p">()</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_pareto</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;lognormal&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_lognormal</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">median_h</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_lognormal</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s1">&#39;The distribution should be either pareto or lognormal.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">h</span> <span class="o">*</span> <span class="n">s_π</span>
+
+    
+<span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sim_lognormal</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">nSim</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simulators. Use numpy package to generate random variables.&quot;&quot;&quot;</span>
+    <span class="n">h_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nSim</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nSim</span><span class="p">):</span>
+        <span class="c1">#            size = LogNormal.rand(s=σ, scale=np.exp(μ), size=N)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="n">h_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">size</span><span class="p">))))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">h_array</span><span class="p">)</span>
+
+
+<span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sim_pareto</span><span class="p">(</span><span class="n">ζ</span><span class="p">,</span> <span class="n">xm</span><span class="p">,</span> <span class="n">nSim</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">h_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nSim</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nSim</span><span class="p">):</span>
+        <span class="c1">#            size = pareto.rvs(b=self.ζ, loc=0, scale=self.xm, size=N)</span>
+        <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="c1"># uniform[0, 1)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">xm</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">U</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">ζ</span><span class="p">)</span>
+        <span class="n">h_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">size</span><span class="p">))))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">h_array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To begin with, simulate the herfindhl for Pareto distribution. The formulas are from <a class="bibtex reference internal" href="#gabaix2011granular" id="id9">[Gab11]</a>.</p>
+<div class="math notranslate nohighlight">
+\[h = \big[\sum_{i=1}^{N} (\frac{S_{it}}{Y_t})^2\big]^{0.5} \]</div>
+<div class="math notranslate nohighlight">
+\[Y_t = \sum_{i=1}^{N} S_{it} \]</div>
+<p>Except for <span class="math notranslate nohighlight">\(\zeta=1\)</span>, also assume that <span class="math notranslate nohighlight">\(\zeta\)</span> is 1.059 following <a class="bibtex reference internal" href="#axtell2001zipf" id="id10">[Axt01]</a>.</p>
+<p>Moreover, this experiment generate Pareto distribution by inverse transform sampling. Suppose that the random variable <span class="math notranslate nohighlight">\(X\)</span> is Pareto distributed and its cumulative distribution function is
+\begin{equation*}
+F_X(x)  =
+\begin{cases}
+{(\frac{x_m}{x})}^{\zeta}, &amp; \text{if } x \geq x_m \
+0, &amp; x &lt; x_m
+\end{cases}
+\end{equation*}
+If we let <span class="math notranslate nohighlight">\(F_X(x)=u\)</span>, then random variable <span class="math notranslate nohighlight">\(U=u\)</span> is uniform distributed, <span class="math notranslate nohighlight">\(U \sim \mathcal{U}[0, 1)\)</span>. Then, by the relationship
+<span class="math notranslate nohighlight">\($P(X \leq x) = P(F_X^{-1}(U) \leq x) = P(U \leq F_X(x)) = F_U(F_X(x)) = F_X(x),\)</span>$
+we can obtain the Pareto random variable <span class="math notranslate nohighlight">\(X\)</span> by taking the inverse transform of uniform distributed <span class="math notranslate nohighlight">\(U\)</span>. More specifically, <span class="math notranslate nohighlight">\(x = F_X^{-1}(u) = x_m (1-u)^{-1/\zeta}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">herfindahl</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">zeta</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.059</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]:</span>
+    <span class="n">H</span><span class="o">.</span><span class="n">ζ</span> <span class="o">=</span> <span class="n">zeta</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If ζ is </span><span class="si">%1.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">zeta</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;,  &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;then h is </span><span class="si">%1.2f%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">median_h</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; and the corresponding σ_GDP is </span><span class="si">%1.2f%%</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">s_GDP</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>If ζ is 1.000,  then h is 11.88% and the corresponding σ_GDP is 1.43%.
+If ζ is 1.059,  then h is 7.84% and the corresponding σ_GDP is 0.94%.
+If ζ is 1.500,  then h is 0.76% and the corresponding σ_GDP is 0.09%.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, if <span class="math notranslate nohighlight">\(\zeta\)</span> is one, the herfindahl h is <span class="math notranslate nohighlight">\(11.88\%\)</span>. This is close to the simulation result, <span class="math notranslate nohighlight">\(12\%\)</span> in <a class="bibtex reference internal" href="#gabaix2011granular" id="id11">[Gab11]</a>.</p>
+<p>While if <span class="math notranslate nohighlight">\(\zeta\)</span> is <span class="math notranslate nohighlight">\(1.059\%\)</span>, the herfindahl is <span class="math notranslate nohighlight">\(7.84\%\)</span> and the standard deviation of growth rate is <span class="math notranslate nohighlight">\(0.94\%\)</span>.</p>
+<p>Gabaix also indicates that the empirically measured aggregate standard deviation of growth rate is around <span class="math notranslate nohighlight">\(1\%\)</span>.</p>
+<p>Both the herfindahl and variance of growth rate are decreasing in <span class="math notranslate nohighlight">\(\zeta\)</span>. If <span class="math notranslate nohighlight">\(\zeta=1.5\)</span>, the standard deviation for GDP growth is less than <span class="math notranslate nohighlight">\(0.1\%\)</span>.</p>
+<p>Generally, the result is compatible with <a class="bibtex reference internal" href="#gabaix2011granular" id="id12">[Gab11]</a>.</p>
+<div class="section" id="match-the-mean-and-median-provided-that-the-log-normal-distribution-is-cut-off-under-some-bar-x">
+<h2>Match the mean and median provided that the log-normal distribution is cut off under some $ \bar{x}$.<a class="headerlink" href="#match-the-mean-and-median-provided-that-the-log-normal-distribution-is-cut-off-under-some-bar-x" title="Permalink to this headline">¶</a></h2>
+<p>Given the Pareto distribution with tail index <span class="math notranslate nohighlight">\(\zeta &gt; 1\)</span>, the density function is
+\begin{equation}
+f_P(x)=
+\begin{cases}
+\frac{\zeta {\bar{x}}^{\zeta}}{x^{\zeta+1}}, &amp; \text{if}\ x\geq \bar{x} \
+0, &amp; \text{otherwise}
+\end{cases}
+\end{equation}
+Then, the corresponding mean and median are <span class="math notranslate nohighlight">\(\frac{\zeta \bar{x}}{\zeta-1}\)</span> and <span class="math notranslate nohighlight">\(\bar{x} 2^{1/\zeta}\)</span>, respectively. The mean can be obtained by <span class="math notranslate nohighlight">\(\mathbb{E}(x)= \int x f_P(x) dx\)</span> and the median is the root for <span class="math notranslate nohighlight">\(\frac{1}{2}=F_P(x)\)</span> where <span class="math notranslate nohighlight">\(F_P(x)= 1-({\frac{x}{\bar{x}}})^{-\zeta}\)</span> is the cumulative density function for <span class="math notranslate nohighlight">\(x \geq \bar{x}\)</span>.</p>
+<p>If the log-normal distribution is <span class="math notranslate nohighlight">\(\ln(x) \sim \mathcal{N}(\mu, \,\sigma)\)</span>, then we can use the same approaches to find that its mean and median. The distribution for log-normal is
+<span class="math notranslate nohighlight">\($g(x) = \frac{1}{\sigma x \sqrt{2\pi}} \exp\{ {-\frac{(\ln{x-\mu})^2}{2\sigma^2}} \}.\)</span>$</p>
+<p>Thus, from <span class="math notranslate nohighlight">\(\mathbb{E}(x)=\int g(x)dx\)</span>, the mean is <span class="math notranslate nohighlight">\(\exp(\mu + \frac{\sigma^2}{2})\)</span>. In addition, the CDF is <span class="math notranslate nohighlight">\(G(x) = \Phi(\frac{\ln(x)-\mu}{\sigma})\)</span> where <span class="math notranslate nohighlight">\(\Phi(.)\)</span> is the CDF for standard normrl. Then, using <span class="math notranslate nohighlight">\(\frac{1}{2} = G(x)\)</span>, we know that <span class="math notranslate nohighlight">\(\frac{\ln(x)-\mu}{\sigma}=0\)</span> and so the median is <span class="math notranslate nohighlight">\(\exp(\mu)\)</span>.</p>
+<p>Now, we can try to match the log-normal with Pareto distribution under Zipf’s law. Since the first moment is infinite when <span class="math notranslate nohighlight">\(\zeta=1\)</span> for Pareto distribution, let <span class="math notranslate nohighlight">\(\zeta\)</span> be very close to one but not one. Following the assumption for simulation in <a class="bibtex reference internal" href="#gabaix2011granular" id="id13">[Gab11]</a>, assume <span class="math notranslate nohighlight">\(\bar{x}=1\)</span>. Then, fixing the mean and median of Pareto distribution (or fixing <span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(\bar{x}\)</span>), if the mean and median for log-normal distribution are equal to those of Pareto distribution, we have</p>
+<p>\begin{align*}\label{eq:1}
+\text{mean} \quad &amp; \frac{\zeta \bar{x}}{\zeta-1} = \exp(\mu + \frac{\sigma^2}{2}) \
+\text{median} \quad &amp; \bar{x} 2^{1/\zeta} = \exp(\mu) \
+\end{align*}</p>
+<p>Solve the equation of median given <span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(\bar{x}=1\)</span>, we have <span class="math notranslate nohighlight">\(\mu = \ln(2^{1/\zeta})\)</span>. Plug this into the mean equation, we can get <span class="math notranslate nohighlight">\(\sigma = (2 \ln(\frac{\zeta}{\zeta-1}) - \frac{2}{\zeta}\ln2)^{1/2}\)</span>.</p>
+<div class="section" id="use-the-formula-to-sove-mu-and-sigma-numerically-and-plot-the-distribution">
+<h3>Use the formula to sove <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> numerically and plot the distribution.<a class="headerlink" href="#use-the-formula-to-sove-mu-and-sigma-numerically-and-plot-the-distribution" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">herfindahl</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">zeta</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">,</span> <span class="mf">1.059</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]:</span>
+    <span class="n">H</span><span class="o">.</span><span class="n">ζ</span> <span class="o">=</span> <span class="n">zeta</span>
+    <span class="n">H</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;$\zeta$ is </span><span class="si">%1.3f</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">zeta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/notebooks_11_0.png" src="_images/notebooks_11_0.png" />
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>μ=0.69315, σ=8.40839
+</pre></div>
+</div>
+<img alt="_images/notebooks_11_2.png" src="_images/notebooks_11_2.png" />
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>μ=0.65453, σ=2.11330
+</pre></div>
+</div>
+<img alt="_images/notebooks_11_4.png" src="_images/notebooks_11_4.png" />
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>μ=0.46210, σ=1.12829
+</pre></div>
+</div>
+</div>
+</div>
+<p>The matched log-normal has the parameters <span class="math notranslate nohighlight">\(\mu=0.65453\)</span> and <span class="math notranslate nohighlight">\(\sigma=2.11330\)</span> given <span class="math notranslate nohighlight">\(\zeta=1059\)</span>.</p>
+<p>Now, simulate the herfindahl for log-normal with these parameters under <span class="math notranslate nohighlight">\(\zeta=1.059\)</span> and <span class="math notranslate nohighlight">\(\zeta=1.5\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">zeta</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1.059</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]:</span>
+    <span class="n">H</span><span class="o">.</span><span class="n">ζ</span> <span class="o">=</span> <span class="n">zeta</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If ζ is </span><span class="si">%1.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="n">zeta</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;,  &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;then h is </span><span class="si">%1.3f%%</span><span class="s1"> for matched log-normal&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">median_h</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;lognormal&#39;</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; and the corresponding σ_GDP is </span><span class="si">%1.3f%%</span><span class="s1">.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">s_GDP</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;lognormal&#39;</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>If ζ is 1.059,  then h is 0.843% for matched log-normal and the corresponding σ_GDP is 0.101%.
+If ζ is 1.500,  then h is 0.189% for matched log-normal and the corresponding σ_GDP is 0.023%.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The scales for herfindahl and <span class="math notranslate nohighlight">\(\sigma_{GDP}\)</span> under log-normal are way smaller than those under Pareto distribution.</p>
+</div>
+<div class="section" id="conclusion">
+<h3>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h3>
+<p>This research simulates the the standard deviations for GDP growth for both Pareto distribution and log-normal distribution for firm sizes under Zipf’s law. The choice of Pareto exponent <span class="math notranslate nohighlight">\(\zeta\)</span> and the formulas for variance follow <a class="bibtex reference internal" href="#gabaix2011granular" id="id14">[Gab11]</a>. In addition, the simulation method is Monte Carlo, the Pareto random variables are generated by the inverse transform sampling, and the parameters for log-normal are determined such that the corresponding mean and median are equal those of Pareto distribution.</p>
+<p>The simulated volatilities for GDP growth are too small and not in the same magnitude for both <span class="math notranslate nohighlight">\(\zeta=1.059\)</span> and <span class="math notranslate nohighlight">\(\zeta=1.5\)</span>.
+When firm’s growth rate is <span class="math notranslate nohighlight">\(12\%\)</span>, the deviation of growth rate $ \sigma_{GDP} = h\sigma $ is around <span class="math notranslate nohighlight">\(0.1\%\)</span> for log-normal which is much lower than <span class="math notranslate nohighlight">\(0.94\%\)</span> of Pareto when <span class="math notranslate nohighlight">\(\zeta=1.059\)</span>. Since the empirically measured macroeconomic fluctuation is around <span class="math notranslate nohighlight">\(1\%\)</span>, the log-normal distribution is not reasonable under this matching method and simulation.
+This also confirms the proposition one of <a class="bibtex reference internal" href="#gabaix2011granular" id="id15">[Gab11]</a>, which shows that the GDP volatility decays in the rate of <span class="math notranslate nohighlight">\(\frac{1}{N^{1/2}}\)</span> when the firm sizes have finite variance. To conclude, the underlying distribution for firm sizes should be Pareto distribution rather than log-normal distribution in this experiment.</p>
+<p id="bibtex-bibliography-notebooks-0"><dl class="citation">
+<dt class="bibtex label" id="axtell2001zipf"><span class="brackets">Axt01</span><span class="fn-backref">(<a href="#id6">1</a>,<a href="#id10">2</a>)</span></dt>
+<dd><p>Robert L Axtell. Zipf distribution of us firm sizes. <em>science</em>, 293(5536):1818–1820, 2001.</p>
+</dd>
+<dt class="bibtex label" id="gabaix2011granular"><span class="brackets">Gab11</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id4">4</a>,<a href="#id5">5</a>,<a href="#id7">6</a>,<a href="#id8">7</a>,<a href="#id9">8</a>,<a href="#id11">9</a>,<a href="#id12">10</a>,<a href="#id13">11</a>,<a href="#id14">12</a>,<a href="#id15">13</a>)</span></dt>
+<dd><p>Xavier Gabaix. The granular origins of aggregate fluctuations. <em>Econometrica</em>, 79(3):733–772, 2011.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

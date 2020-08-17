@@ -1,0 +1,7 @@
+# Book settings
+title: Investigation of the Granular Hypothesis
+author: Prepared by Chien Yeh as research assistance for John Stachurski on power laws and the granular hypothesis
+
+latex:
+  latex_documents:
+    targetname: book.tex
