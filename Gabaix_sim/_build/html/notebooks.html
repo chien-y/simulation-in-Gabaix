@@ -123,6 +123,11 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-setup">
+   The Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#match-the-mean-and-median">
    Match the mean and median.
   </a>
@@ -302,23 +307,26 @@ Moreover, the parameter of Pareto distribution follows <a class="bibtex referenc
 </div>
 </div>
 </div>
+<div class="section" id="the-setup">
+<h2>The Setup<a class="headerlink" href="#the-setup" title="Permalink to this headline">¶</a></h2>
 <p>To begin with, simulate the herfindhl for Pareto distribution. The formulas are from <a class="bibtex reference internal" href="#gabaix2011granular" id="id10">[Gab11]</a>.</p>
 <div class="math notranslate nohighlight">
 \[h = \big[\sum_{i=1}^{N} (\frac{S_{it}}{Y_t})^2\big]^{0.5} \]</div>
 <div class="math notranslate nohighlight">
 \[Y_t = \sum_{i=1}^{N} S_{it} \]</div>
 <p>Except for <span class="math notranslate nohighlight">\(\zeta=1\)</span>, also assume that <span class="math notranslate nohighlight">\(\zeta\)</span> is 1.059 following <a class="bibtex reference internal" href="#axtell2001zipf" id="id11">[Axt01]</a>.</p>
-<p>Moreover, this experiment generate Pareto distribution by inverse transform sampling. Suppose that the random variable <span class="math notranslate nohighlight">\(X\)</span> is Pareto distributed and its cumulative distribution function is
-\begin{equation*}
+<p>Moreover, this experiment generate Pareto distribution by inverse transform sampling. Suppose that the random variable <span class="math notranslate nohighlight">\(X\)</span> is Pareto distributed and its cumulative distribution function is</p>
+<p>\begin{equation}
 F_X(x)  =
 \begin{cases}
 {(\frac{x_m}{x})}^{\zeta}, &amp; \text{if } x \geq x_m \
 0, &amp; x &lt; x_m
 \end{cases}
-\end{equation*}
-If we let <span class="math notranslate nohighlight">\(F_X(x)=u\)</span>, then random variable <span class="math notranslate nohighlight">\(U=u\)</span> is uniform distributed, <span class="math notranslate nohighlight">\(U \sim \mathcal{U}[0, 1)\)</span>. Then, by the relationship
-<span class="math notranslate nohighlight">\($P(X \leq x) = P(F_X^{-1}(U) \leq x) = P(U \leq F_X(x)) = F_U(F_X(x)) = F_X(x),\)</span>$
-we can obtain the Pareto random variable <span class="math notranslate nohighlight">\(X\)</span> by taking the inverse transform of uniform distributed <span class="math notranslate nohighlight">\(U\)</span>. More specifically, <span class="math notranslate nohighlight">\(x = F_X^{-1}(u) = x_m (1-u)^{-1/\zeta}\)</span>.</p>
+\end{equation}</p>
+<p>If we let <span class="math notranslate nohighlight">\(F_X(x)=u\)</span>, then random variable <span class="math notranslate nohighlight">\(U=u\)</span> is uniform distributed, <span class="math notranslate nohighlight">\(U \sim \mathcal{U}[0, 1)\)</span>. Then, by the relationship</p>
+<p>\begin{equation}P(X \leq x) = P(F_X^{-1}(U) \leq x) = P(U \leq F_X(x)) = F_U(F_X(x)) = F_X(x),
+\end{equation}</p>
+<p>we can obtain the Pareto random variable <span class="math notranslate nohighlight">\(X\)</span> by taking the inverse transform of uniform distributed <span class="math notranslate nohighlight">\(U\)</span>. More specifically, <span class="math notranslate nohighlight">\(x = F_X^{-1}(u) = x_m (1-u)^{-1/\zeta}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">herfindahl</span><span class="p">()</span>
@@ -344,27 +352,26 @@ If ζ is 1.500,  then h is 0.76% and the corresponding σ_GDP is 0.09%.
 <p>Gabaix also indicates that the empirically measured aggregate standard deviation of growth rate is around <span class="math notranslate nohighlight">\(1\%\)</span>.</p>
 <p>Both the herfindahl and variance of growth rate are decreasing in <span class="math notranslate nohighlight">\(\zeta\)</span>. If <span class="math notranslate nohighlight">\(\zeta=1.5\)</span>, the standard deviation for GDP growth is less than <span class="math notranslate nohighlight">\(0.1\%\)</span>.</p>
 <p>Generally, the result is compatible with <a class="bibtex reference internal" href="#gabaix2011granular" id="id13">[Gab11]</a>.</p>
+</div>
 <div class="section" id="match-the-mean-and-median">
 <h2>Match the mean and median.<a class="headerlink" href="#match-the-mean-and-median" title="Permalink to this headline">¶</a></h2>
 <p>Given the Pareto distribution with tail index <span class="math notranslate nohighlight">\(\zeta &gt; 1\)</span>, the density function is
 \begin{equation}
-f_P(x)=
-\begin{cases}
-\frac{\zeta {\bar{x}}^{\zeta}}{x^{\zeta+1}}, &amp; \text{if}\ x\geq \bar{x} \
-0, &amp; \text{otherwise}
-\end{cases}
-\end{equation}
-Then, the corresponding mean and median are <span class="math notranslate nohighlight">\(\frac{\zeta \bar{x}}{\zeta-1}\)</span> and <span class="math notranslate nohighlight">\(\bar{x} 2^{1/\zeta}\)</span>, respectively. The mean can be obtained by <span class="math notranslate nohighlight">\(\mathbb{E}(x)= \int x f_P(x) dx\)</span> and the median is the root for <span class="math notranslate nohighlight">\(\frac{1}{2}=F_P(x)\)</span> where <span class="math notranslate nohighlight">\(F_P(x)= 1-({\frac{x}{\bar{x}}})^{-\zeta}\)</span> is the cumulative density function for <span class="math notranslate nohighlight">\(x \geq \bar{x}\)</span>.</p>
-<p>If the log-normal distribution is <span class="math notranslate nohighlight">\(\ln(x) \sim \mathcal{N}(\mu, \,\sigma)\)</span>, then we can use the same approaches to find that its mean and median. The distribution for log-normal is
-<span class="math notranslate nohighlight">\($g(x) = \frac{1}{\sigma x \sqrt{2\pi}} \exp\{ {-\frac{(\ln{x-\mu})^2}{2\sigma^2}} \}.\)</span>$</p>
+f_P(x)=\frac{\zeta {\bar{x}}^{\zeta}}{x^{\zeta+1}}, \text{ if}\ x\geq \bar{x}
+\end{equation}</p>
+<p>Then, the corresponding mean and median are <span class="math notranslate nohighlight">\(\frac{\zeta \bar{x}}{\zeta-1}\)</span> and <span class="math notranslate nohighlight">\(\bar{x} 2^{1/\zeta}\)</span>, respectively. The mean can be obtained by <span class="math notranslate nohighlight">\(\mathbb{E}(x)= \int x f_P(x) dx\)</span> and the median is the root for <span class="math notranslate nohighlight">\(\frac{1}{2}=F_P(x)\)</span> where <span class="math notranslate nohighlight">\(F_P(x)= 1-({\frac{x}{\bar{x}}})^{-\zeta}\)</span> is the cumulative density function for <span class="math notranslate nohighlight">\(x \geq \bar{x}\)</span>.</p>
+<p>If the log-normal distribution is <span class="math notranslate nohighlight">\(\ln(x) \sim \mathcal{N}(\mu, \,\sigma)\)</span>, then we can use the same approaches to find that its mean and median. The distribution for log-normal is</p>
+<p>\begin{equation}
+g(x) = \frac{1}{\sigma x \sqrt{2\pi}} \exp{ {-\frac{(\ln{x-\mu})^2}{2\sigma^2}} }.
+\end{equation}</p>
 <p>Thus, from <span class="math notranslate nohighlight">\(\mathbb{E}(x)=\int g(x)dx\)</span>, the mean is <span class="math notranslate nohighlight">\(\exp(\mu + \frac{\sigma^2}{2})\)</span>. In addition, the CDF is <span class="math notranslate nohighlight">\(G(x) = \Phi(\frac{\ln(x)-\mu}{\sigma})\)</span> where <span class="math notranslate nohighlight">\(\Phi(.)\)</span> is the CDF for standard normrl. Then, using <span class="math notranslate nohighlight">\(\frac{1}{2} = G(x)\)</span>, we know that <span class="math notranslate nohighlight">\(\frac{\ln(x)-\mu}{\sigma}=0\)</span> and so the median is <span class="math notranslate nohighlight">\(\exp(\mu)\)</span>.</p>
-<p>Now, we can try to match the log-normal with Pareto distribution under Zipf’s law. Since the first moment is infinite when <span class="math notranslate nohighlight">\(\zeta=1\)</span> for Pareto distribution, let <span class="math notranslate nohighlight">\(\zeta\)</span> be very close to one but not one. Following the assumption for simulation in <a class="bibtex reference internal" href="#gabaix2011granular" id="id14">[Gab11]</a>, assume <span class="math notranslate nohighlight">\(\bar{x}=1\)</span>. Then, fixing the mean and median of Pareto distribution (or fixing <span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(\bar{x}\)</span>), if the mean and median for log-normal distribution are equal to those of Pareto distribution, we have
-<span class="math notranslate nohighlight">\($
+<p>Now, we can try to match the log-normal with Pareto distribution under Zipf’s law. Since the first moment is infinite when <span class="math notranslate nohighlight">\(\zeta=1\)</span> for Pareto distribution, let <span class="math notranslate nohighlight">\(\zeta\)</span> be very close to one but not one. Following the assumption for simulation in <a class="bibtex reference internal" href="#gabaix2011granular" id="id14">[Gab11]</a>, assume <span class="math notranslate nohighlight">\(\bar{x}=1\)</span>. Then, fixing the mean and median of Pareto distribution (or fixing <span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(\bar{x}\)</span>), if the mean and median for log-normal distribution are equal to those of Pareto distribution, we have the mean</p>
+<p>\begin{equation}
 \text{mean: } \quad \frac{\zeta \bar{x}}{\zeta-1} = \exp(\mu + \frac{\sigma^2}{2})
-$\)</span>
-<span class="math notranslate nohighlight">\($
-\text{median: } \quad  \bar{x} 2^{1/\zeta} = \exp(\mu) 
-$\)</span></p>
+\end{equation}
+\begin{equation}
+\text{median: } \quad  \bar{x} 2^{1/\zeta} = \exp(\mu)
+\end{equation}</p>
 <p>Solve the equation of median given <span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(\bar{x}=1\)</span>, we have <span class="math notranslate nohighlight">\(\mu = \ln(2^{1/\zeta})\)</span>. Plug this into the mean equation, we can get <span class="math notranslate nohighlight">\(\sigma = (2 \ln(\frac{\zeta}{\zeta-1}) - \frac{2}{\zeta}\ln2)^{1/2}\)</span>.</p>
 <div class="section" id="use-the-formula-to-sove-mu-and-sigma-numerically-and-plot-the-distribution">
 <h3>Use the formula to sove <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> numerically and plot the distribution.<a class="headerlink" href="#use-the-formula-to-sove-mu-and-sigma-numerically-and-plot-the-distribution" title="Permalink to this headline">¶</a></h3>

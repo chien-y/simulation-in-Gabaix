@@ -140,7 +140,7 @@ def sim_pareto(ζ, xm, nSim, N):
         h_array[i] = np.sqrt(np.sum(np.square(size / np.sum(size))))
     return np.median(h_array)
 
-
+#### The Setup
 To begin with, simulate the herfindhl for Pareto distribution. The formulas are from {cite}`gabaix2011granular`.
 
 $$h = \big[\sum_{i=1}^{N} (\frac{S_{it}}{Y_t})^2\big]^{0.5} $$
@@ -149,15 +149,20 @@ $$Y_t = \sum_{i=1}^{N} S_{it} $$
 Except for $\zeta=1$, also assume that $\zeta$ is 1.059 following {cite}`axtell2001zipf`.
 
 Moreover, this experiment generate Pareto distribution by inverse transform sampling. Suppose that the random variable $X$ is Pareto distributed and its cumulative distribution function is 
-\begin{equation*}
+
+\begin{equation}
     F_X(x)  =
     \begin{cases}
     {(\frac{x_m}{x})}^{\zeta}, & \text{if } x \geq x_m \\
     0, & x < x_m 
     \end{cases}
-\end{equation*}
+\end{equation}
+
 If we let $F_X(x)=u$, then random variable $U=u$ is uniform distributed, $U \sim \mathcal{U}[0, 1)$. Then, by the relationship
-$$P(X \leq x) = P(F_X^{-1}(U) \leq x) = P(U \leq F_X(x)) = F_U(F_X(x)) = F_X(x),$$
+
+\begin{equation}P(X \leq x) = P(F_X^{-1}(U) \leq x) = P(U \leq F_X(x)) = F_U(F_X(x)) = F_X(x),
+\end{equation}
+
 we can obtain the Pareto random variable $X$ by taking the inverse transform of uniform distributed $U$. More specifically, $x = F_X^{-1}(u) = x_m (1-u)^{-1/\zeta}$.
 
 
@@ -182,26 +187,27 @@ Generally, the result is compatible with {cite}`gabaix2011granular`.
 #### Match the mean and median.
 Given the Pareto distribution with tail index $\zeta > 1$, the density function is
 \begin{equation}
-    f_P(x)=
-    \begin{cases}
-      \frac{\zeta {\bar{x}}^{\zeta}}{x^{\zeta+1}}, & \text{if}\ x\geq \bar{x} \\
-      0, & \text{otherwise}
-    \end{cases}
-  \end{equation}
+f_P(x)=\frac{\zeta {\bar{x}}^{\zeta}}{x^{\zeta+1}}, \text{ if}\ x\geq \bar{x} 
+\end{equation}
+  
 Then, the corresponding mean and median are $\frac{\zeta \bar{x}}{\zeta-1}$ and $\bar{x} 2^{1/\zeta}$, respectively. The mean can be obtained by $\mathbb{E}(x)= \int x f_P(x) dx$ and the median is the root for $\frac{1}{2}=F_P(x)$ where $F_P(x)= 1-({\frac{x}{\bar{x}}})^{-\zeta}$ is the cumulative density function for $x \geq \bar{x}$.
 
 If the log-normal distribution is $\ln(x) \sim \mathcal{N}(\mu, \,\sigma)$, then we can use the same approaches to find that its mean and median. The distribution for log-normal is
-$$g(x) = \frac{1}{\sigma x \sqrt{2\pi}} \exp\{ {-\frac{(\ln{x-\mu})^2}{2\sigma^2}} \}.$$
+
+\begin{equation}
+g(x) = \frac{1}{\sigma x \sqrt{2\pi}} \exp\{ {-\frac{(\ln{x-\mu})^2}{2\sigma^2}} \}.
+\end{equation}
 
 Thus, from $\mathbb{E}(x)=\int g(x)dx$, the mean is $\exp(\mu + \frac{\sigma^2}{2})$. In addition, the CDF is $G(x) = \Phi(\frac{\ln(x)-\mu}{\sigma})$ where $\Phi(.)$ is the CDF for standard normrl. Then, using $\frac{1}{2} = G(x)$, we know that $\frac{\ln(x)-\mu}{\sigma}=0$ and so the median is $\exp(\mu)$.
 
-Now, we can try to match the log-normal with Pareto distribution under Zipf's law. Since the first moment is infinite when $\zeta=1$ for Pareto distribution, let $\zeta$ be very close to one but not one. Following the assumption for simulation in {cite}`gabaix2011granular`, assume $\bar{x}=1$. Then, fixing the mean and median of Pareto distribution (or fixing $\zeta$ and $\bar{x}$), if the mean and median for log-normal distribution are equal to those of Pareto distribution, we have
-$$
+Now, we can try to match the log-normal with Pareto distribution under Zipf's law. Since the first moment is infinite when $\zeta=1$ for Pareto distribution, let $\zeta$ be very close to one but not one. Following the assumption for simulation in {cite}`gabaix2011granular`, assume $\bar{x}=1$. Then, fixing the mean and median of Pareto distribution (or fixing $\zeta$ and $\bar{x}$), if the mean and median for log-normal distribution are equal to those of Pareto distribution, we have the mean
+
+\begin{equation}
 \text{mean: } \quad \frac{\zeta \bar{x}}{\zeta-1} = \exp(\mu + \frac{\sigma^2}{2})
-$$
-$$
+\end{equation}
+\begin{equation}
 \text{median: } \quad  \bar{x} 2^{1/\zeta} = \exp(\mu) 
-$$
+\end{equation}
 
 Solve the equation of median given $\zeta$ and $\bar{x}=1$, we have $\mu = \ln(2^{1/\zeta})$. Plug this into the mean equation, we can get $\sigma = (2 \ln(\frac{\zeta}{\zeta-1}) - \frac{2}{\zeta}\ln2)^{1/2}$.
 
